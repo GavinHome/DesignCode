@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043DA62A236C618D00B6840A /* UpdateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DA629236C618D00B6840A /* UpdateStore.swift */; };
 		044F4771236588E100F4D8E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F4770236588E100F4D8E0 /* AppDelegate.swift */; };
 		044F4773236588E100F4D8E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F4772236588E100F4D8E0 /* SceneDelegate.swift */; };
 		044F4775236588E100F4D8E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F4774236588E100F4D8E0 /* ContentView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043DA629236C618D00B6840A /* UpdateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStore.swift; sourceTree = "<group>"; };
 		044F476D236588E100F4D8E0 /* DesignCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F4770236588E100F4D8E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		044F4772236588E100F4D8E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				044F4778236588E700F4D8E0 /* Preview Content */,
 				0498DF15236863D600B16476 /* UpdateList.swift */,
 				0498DF1723686C9400B16476 /* UpdateDetail.swift */,
+				043DA629236C618D00B6840A /* UpdateStore.swift */,
 			);
 			path = DesignCode;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				044F4771236588E100F4D8E0 /* AppDelegate.swift in Sources */,
+				043DA62A236C618D00B6840A /* UpdateStore.swift in Sources */,
 				0498DF16236863D600B16476 /* UpdateList.swift in Sources */,
 				0498DF1023670C3D00B16476 /* HomeList.swift in Sources */,
 				0498DF1823686C9400B16476 /* UpdateDetail.swift in Sources */,

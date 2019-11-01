@@ -11,58 +11,57 @@ import SwiftUI
 struct UpdateList: View {
     @State var showSetting = false
     var updates = updateDate
-    //@ObservedObject var store = UpdateStore(updates: updateDate)
-    
-//    func addItem() {
-////        store.updates.append(Update(image: "Illustration1", title: "newTitle", text: "newText", date: "JUN 26"))
-//    }
+    @ObservedObject var store = UpdateStore(updates: updateDate)
     
     var body: some View {
         NavigationView {
             VStack {
-//                Button(action: { }) {
-//                    HStack {
-//                        Text("Add Item").foregroundColor(.white)
-//                    }
-//                }
-//                .padding(8)
-//                .background(Color("background3"))
-//                .cornerRadius(8)
+                Button(action: {
+                    self.store.updates.append(Update(image: "Illustration1", title: "newTitle", text: "newText", date: "JUN 26"))
+                }) {
+                    Text("Add Item").foregroundColor(.white)
+                }
+                .padding(8)
+                .background(Color("background3"))
+                .cornerRadius(8)
                 
-                List(updates) { item in
-                    NavigationLink(destination: UpdateDetail(update: item)) {
-                        HStack(spacing: 12.0) {
-                            Image(item.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 80, height: 80)
-                                .background(Color("background"))
-                                .cornerRadius(20)
-                            
-                            VStack(alignment: .leading) {
-                                Text(item.title)
-                                    .font(.headline)
-                                Text(item.text)
-                                    .lineLimit(2)
-                                    .lineSpacing(4)
-                                    .font(.subheadline)
-                                    .frame(height: 50)
-                                Text(item.date)
-                                    .font(.caption)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.gray)
+                List {
+                    ForEach(store.updates) { item in
+                        NavigationLink(destination: UpdateDetail(update: item)) {
+                            HStack(spacing: 12.0) {
+                                Image(item.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 80, height: 80)
+                                    .background(Color("background"))
+                                    .cornerRadius(20)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(item.title)
+                                        .font(.headline)
+                                    Text(item.text)
+                                        .lineLimit(2)
+                                        .lineSpacing(4)
+                                        .font(.subheadline)
+                                        .frame(height: 50)
+                                    Text(item.date)
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
+                        .padding(.vertical, 8)
                     }
-                    .padding(.vertical, 8)
+                    .onDelete { indexSet in
+                        self.store.updates.remove(at: indexSet.first!)
+                    }.onMove { indecies, newOffset in
+                        self.store.updates.move(fromOffsets: indecies, toOffset: newOffset)
+                    }
                 }
                 .navigationBarTitle(Text("Updates"))
                 .navigationBarItems(trailing:
-                    Button(action: { self.showSetting.toggle() }) {
-                        HStack {
-                            Image(systemName: "gear")
-                        }
-                    }
+                    EditButton()
                 )
             }
             .sheet(isPresented: self.$showSetting) {
