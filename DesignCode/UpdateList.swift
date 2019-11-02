@@ -16,14 +16,14 @@ struct UpdateList: View {
     var body: some View {
         NavigationView {
             VStack {
-                Button(action: {
-                    self.store.updates.append(Update(image: "Illustration1", title: "newTitle", text: "newText", date: "JUN 26"))
-                }) {
-                    Text("Add Item").foregroundColor(.white)
-                }
-                .padding(8)
-                .background(Color("background3"))
-                .cornerRadius(8)
+//                Button(action: {
+//                    self.store.updates.append(Update(image: "Illustration1", title: "newTitle", text: "newText", date: "JUN 26"))
+//                }) {
+//                    Text("Add Item").foregroundColor(.white)
+//                }
+//                .padding(8)
+//                .background(Color("background3"))
+//                .cornerRadius(8)
                 
                 List {
                     ForEach(store.updates) { item in
@@ -60,8 +60,13 @@ struct UpdateList: View {
                     }
                 }
                 .navigationBarTitle(Text("Updates"))
-                .navigationBarItems(trailing:
-                    EditButton()
+                .navigationBarItems(
+                    leading: Button(action: {
+                        self.store.updates.append(Update(image: "Illustration1", title: "newTitle", text: "newText", date: "JUN 26"))
+                    }) {
+                        Image(systemName: "plus")
+                    },
+                    trailing: EditButton()
                 )
             }
             .sheet(isPresented: self.$showSetting) {

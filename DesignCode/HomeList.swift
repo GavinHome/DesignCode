@@ -9,43 +9,59 @@
 import SwiftUI
 
 struct HomeList: View {
-    var courses = coursesData
-    @State private var showModal = false
+    
+    let courseData = CourseData
+    @State var showModel = false
+    
     var body: some View {
-        VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Courses")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                    Text("22 courses")
-                        .foregroundColor(.gray)
+        
+        ScrollView {
+            VStack {
+                HStack {
+                    VStack {
+                        Text("Hello")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                        Text("22 person")
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
                 }
-                Spacer()
-            }
-            .padding(.leading, 70)
-            .padding(.bottom, 40)
-            
-            ScrollView(Axis.Set.horizontal, showsIndicators: false) {
-                HStack(spacing: 30) {
-                    ForEach(courses) { item in
-                        Button(action: { self.showModal.toggle() }) {
-                            HStack {
-                                CourseView(course: item)
+                .padding(.leading, 70)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 30) {
+                        ForEach(courseData) { item in
+                            Button(action: {
+                                self.showModel = true
+                            }) {
+                                GeometryReader { geometry in
+                                    CourseView(
+                                        title: item.title,
+                                        image: item.image,
+                                        backgroundColor: item.backgroundColor,
+                                        shadowColor: item.shadowColor
+                                    )
+                                        .rotation3DEffect(Angle(degrees: Double(geometry.frame(in: .global).minX - 40) / -40), axis: (x: 0, y: 10, z: 0))
+                                }
+                                .frame(width: 246, height: 360)
+                            }.sheet(isPresented: self.$showModel) {
+                                ContentView()
                             }
+                            
                         }
                     }
+                    .padding(.leading, 30)
+                    .padding(.top, 30)
+                    .padding(.bottom, 70)
+                    Spacer()
                 }
-                .sheet(isPresented: self.$showModal) {
-                    ContentView()
-                }
-                .padding(.leading, 40)
+                
+                CertificateRow()
             }
-            
-            Spacer()
+            .padding(.top, 78)
+            .padding(.bottom, 83)
         }
-        .padding(.top, 78)
-        
     }
 }
 
@@ -56,50 +72,77 @@ struct HomeList_Previews: PreviewProvider {
 }
 
 struct CourseView: View {
-    var course: Course
+    var title : String = "Build an app with SwiftUI"
+    var image : String = "Illustration1"
+    var backgroundColor: Color = Color("background3")
+    var shadowColor : Color = Color("shadow3")
     var body: some View {
         VStack(alignment: .leading) {
-            Text(self.course.title)
+            Text(title)
                 .font(.title)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .foregroundColor(.white)
-                .padding(30)
+                .padding(20)
                 .lineLimit(4)
                 .padding(.trailing, 50)
             Spacer()
-            Image(self.course.icon)
+            Image(image)
                 .resizable()
                 .renderingMode(.original)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 246, height: 200)
+                .aspectRatio(contentMode: ContentMode.fit)
+                .frame(width: 246, height: 150)
                 .padding(.bottom, 30)
         }
-        .background(self.course.color)
+        .background(backgroundColor)
         .cornerRadius(30)
         .frame(width: 246, height: 360)
-        .shadow(color: self.course.shdowColor, radius: 20, x: 0, y: 20)
+        .shadow(color: shadowColor, radius: 20, x: 0, y: 20)
     }
 }
 
 struct Course: Identifiable {
     var id = UUID()
-    var title: String
-    var icon: String
-    var color: Color
-    var shdowColor: Color
+    var title : String
+    var image : String
+    var backgroundColor: Color
+    var shadowColor : Color
 }
 
-let coursesData = [
+let CourseData = [
     Course(
         title: "Build an app with SwiftUI",
-        icon: "Illustration1",
-        color: Color("background3"),
-        shdowColor: Color("shadow3")
+        image: "Illustration1",
+        backgroundColor: Color("background3"),
+        shadowColor: Color("shadow3")
     ),
     Course(
-        title: "Design Course",
-        icon: "Illustration2",
-        color: Color("background4"),
-        shdowColor: Color("shadow4")
+        title: "Hello cat haha",
+        image: "Illustration2",
+        backgroundColor: Color("background4"),
+        shadowColor: Color("shadow4")
+    ),
+    Course(
+        title: "Build an app with SwiftUI",
+        image: "Illustration1",
+        backgroundColor: Color("background3"),
+        shadowColor: Color("shadow3")
+    ),
+    Course(
+        title: "Hello cat haha",
+        image: "Illustration2",
+        backgroundColor: Color("background4"),
+        shadowColor: Color("shadow4")
+    ),
+    Course(
+        title: "Build an app with SwiftUI",
+        image: "Illustration1",
+        backgroundColor: Color("background3"),
+        shadowColor: Color("shadow3")
+    ),
+    Course(
+        title: "Hello cat haha",
+        image: "Illustration2",
+        backgroundColor: Color("background4"),
+        shadowColor: Color("shadow4")
     )
 ]
